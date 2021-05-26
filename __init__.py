@@ -1,5 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
+from pprint import pp
 
 class VartaStoragePortalClient():
     api_url = 'https://www.varta-storage-portal.com/ws/app/'
@@ -36,7 +37,6 @@ class VartaStoragePortalClient():
     # autarkie (payload: {modus: ["tag", "monat", "jahr", "gesamt"],datum: date.isoformat...})
     # betriebsdaten (payload: {modus: ["tag", "monat", "jahr", "gesamt"],datum: date.isoformat...})
     # kontakt (payload: {Betreff: , Nachricht: ....})
-
     def _callService(self, service_name, payload):
         params = dict()
         params["func"] = service_name
@@ -64,4 +64,4 @@ if __name__ == "__main__":
 
     client = VartaStoragePortalClient()
     login_result = client.login(username=username, password=password)
-    print(login_result)
+    pp(client._callService('status', {"serial": username}))
