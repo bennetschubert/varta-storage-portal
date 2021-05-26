@@ -1,6 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
-from pprint import pp
+#from pprint import pp
 
 class VartaStoragePortalClient():
     api_url = 'https://www.varta-storage-portal.com/ws/app/'
@@ -64,4 +64,4 @@ if __name__ == "__main__":
 
     client = VartaStoragePortalClient()
     login_result = client.login(username=username, password=password)
-    pp(client._callService('status', {"serial": username}))
+    print(client._callService('status', {"serial": username}))
