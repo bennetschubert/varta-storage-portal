@@ -21,13 +21,21 @@ class VartaStoragePortalClient():
         auth =  HTTPBasicAuth(username, password)
         res = requests.post(self.api_url, params=params, headers=headers, auth=auth)
         if res.status_code == 200:
-            self.auth_token = r.headers.get('Auth-Token')
+            self.auth_token = res.headers.get('Auth-Token')
             self.current_user = res.json()
             return self.current_user
         else:
             self.auth_token = None
             self.current_user = None
             raise Exception("Login failed", res.status_code, res.text)
+
+    # Available Service Names:
+    # service (payload: {serial: storageSerialNumber})
+    # status (payload: {})
+    # gespeicherteEnergie (payload: {modus: ["tag", "monat", "jahr", "gesamt"],datum: date.isoformat...})
+    # autarkie (payload: {modus: ["tag", "monat", "jahr", "gesamt"],datum: date.isoformat...})
+    # betriebsdaten (payload: {modus: ["tag", "monat", "jahr", "gesamt"],datum: date.isoformat...})
+    # kontakt (payload: {Betreff: , Nachricht: ....})
 
     def _callService(self, service_name, payload):
         params = dict()
@@ -42,7 +50,7 @@ class VartaStoragePortalClient():
         res = requests.post(self.api_url, params=params, headers=headers, json=payload)
         if res.status_code == 200:
             return res.json()
-        else
+        else:
             raise Exception("Service call failed", res.status_code, res.text)
 
 if __name__ == "__main__":
