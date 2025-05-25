@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vartaclient"
+version = "0.0.0"
+dependencies = [
+    "requests",
+    "chompjs"
+]
+
+[project.optional-dependencies]
+development = [
+    "pytest",
+    "requests-mock"
+]

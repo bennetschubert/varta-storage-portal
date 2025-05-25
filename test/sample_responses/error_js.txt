@@ -1,0 +1,2 @@
+var ErrorList = [];
+var NA_ErrorList = [[-1,0xffffffff],[-1,0xffffffff],[-1,0xffffffff],[-1,0xffffffff],[-1,0xffffffff]];
